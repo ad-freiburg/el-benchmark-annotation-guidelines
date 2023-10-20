@@ -1,14 +1,42 @@
-# Benchmark Annotation Guidelines
+# Entity Linking Benchmark Annotation Guidelines
 
-The following are the guidelines we derived to annotate our Wiki-Fair and News-Fair benchmarks.
+The following annotation guidelines were derived to annotate the Wiki-Fair and News-Fair entity linking benchmarks.
+ The guidelines are aimed at making an entity linking benchmark as consistent and fair as possible.
+
+**Knowledge Base:** The guidelines assume that the annotation is done over Wikidata entities, but they can be
+ generalized to other Knowledge Bases. However, we recommend annotating over Wikidata, since it contains way more
+ entities than for example Wikipedia or DBpedia which means less entities have to be annotated with NIL / Unknown.
+
+**Type Whitelist:** A type whitelist is defined to create a clearer decision boundary of which kinds of entities
+ should be annotated (see [Entities with whitelist types](#entities-with-whitelist-types)). This type whitelist is
+ however not set in stone and can be adjusted if needed.
 
 **Notation:**
-Entity annotations are written as "[Q1234|**original mention text**]". Alternative annotations are written as nested
- annotations, e.g., "[Q1234|**original** [Q1234|**mention text**]]". Prefixes to the QID can be used to describe the
-  annotation type. E.g. "[optional:Q1234|**some text
- **]" or
- "[desc:Q123|**some entity description**]".
+Entity annotations are written here as "[Q1234|**original mention text**]". Alternative annotations are written as
+ nested annotations, e.g., "[Q1234|**original** [Q1234|**mention text**]]". Prefixes to the QID are used to
+ describe the annotation type. E.g. "[optional:Q1234|**some text**]" or [desc:Q123|**some entity description**]".
 
+## Table of Contents
+- [What kind of entities should be annotated?](#what-kind-of-entities-should-be-annotated?)
+    - [Entities with whitelist types](#entities-with-whitelist-types)
+    - [Occupation vs. profession](#occupation-vs-profession)
+    - [Datetimes and quantities](#datetimes-and-quantities)
+    - [Notability of an entity](#notability-of-an-entity)
+- [How to annotate implicit references to entities?](#how-to-annotate-implicit-references-to-entities)
+    - [Descriptive mentions](#descriptive-mentions)
+    - [Narrowing of entities](#narrowing-of-entities)
+    - [Names](#names)
+    - [Figurative language](#figurative-language)
+    - [Coreferences](#coreferences)
+- [What should be part of an entity mention?](#what-should-be-part-of-an-entity-mention)
+    - [Alternative mention spans](#alternative-mention-spans)
+    - [Entity name + type](#entity-name--type)
+    - [Descriptive prefix to an entity](#descriptive-prefix-to-an-entity)
+    - [Honorific prefixes](#honorific-prefixes)
+    - [Distributed entity mentions](#distributed-entity-mentions)
+- [Which entity should a mention be annotated with?](#which-entity-should-a-mention-be-annotated-with)
+    - [Demonyms](#demonyms)
+    - [Metonyms](#metonyms)
 
 ## What kind of entities should be annotated?
 
@@ -18,8 +46,8 @@ In the sentence "[[Q44578](https://www.wikidata.org/wiki/Q44578)|**Titanic**] **
  [[Q2526255](https://www.wikidata.org/wiki/Q2526255)|**director**]
  [[Q42574](https://www.wikidata.org/wiki/Q42574)|**James Cameron**]**.**"
  , the entities for "Titanic", "director" and "James Cameron" all have an instance of / subclass of path in Wikidata
- to a type from our type whitelist ("creative work", "occupation" and "person", respectively). "film" on the other
- hand is not an instance of any type in Wikidata, but only subclass of some types.
+ to a type from a pre-defined type whitelist ("creative work", "occupation" and "person", respectively). "film" on the
+ other hand is not an instance of any type in Wikidata, but only subclass of some types.
 
 **Guideline:**
 Annotate only entities that have an instance of / subclass of (P31/P279*) path to at least one type that occurs in a
@@ -42,13 +70,13 @@ While it is relatively easy to decide what counts as an entity when only conside
 
 **More examples:**
 - “[[Q22656](https://www.wikidata.org/wiki/Q22656)|**oil**] **or**
- [[Q40858](https://www.wikidata.org/wiki/Q40858)|**gas**] **reserves**”
- *(Only oil has a whitelist type, gas on the  other hand is only subclass of fossil fuel, fuel gas and mixture. But
- if one of those has a whitelist type, clearly the other one should also have one.)*
-- "**mediation, arbitration and conflict resolution**"
- *(Conflict resolution has the whitelist type academic discipline while mediation and arbitration don't. However, it
+ [[Q40858](https://www.wikidata.org/wiki/Q40858)|**gas**] **reserves**”:
+ Only oil has a whitelist type, gas on the  other hand is only subclass of fossil fuel, fuel gas and mixture. But
+ if one of those has a whitelist type, clearly the other one should also have one.
+- "**mediation, arbitration and conflict resolution**":
+ Conflict resolution has the whitelist type academic discipline while mediation and arbitration don't. However, it
  is quite clear that all three phrases should be handled the same. Conflict resolution is not an academic discipline
- in the same sense that Psychology or Maths is, so we decide not to annotate any of the phrases.)*
+ in the same sense that Psychology or Maths is, so we decide not to annotate any of the phrases.
  
 ### Occupation vs. profession
 **Example:**
@@ -76,7 +104,7 @@ Many Wikidata occupations are not professions or occupations in the typical sens
 - "supporter"
 - "lover"
 
-### Datetimes and Quantities
+### Datetimes and quantities
 **Example:**
  In the sentence "[[Q16855376](https://www.wikidata.org/wiki/Q16855376)|**Wayde**] **was born prematurel on**
  [datetime|**July 15, 1992**] **and weighed only a little over** [quantity|**1**] **kg.**"
@@ -178,16 +206,16 @@ Currently, most systems don't recognize purely descriptive mentions. However, it
 - "[desc:Unknown1|**performance** [[Q485178](https://www.wikidata.org/wiki/Q485178)|**analyst**]"
 - "**In the** [desc:datetime|**previous year**], **the**
  [[Q5389](https://www.wikidata.org/wiki/Q5389)|**Olympic Games**] **had been held in**
- [[Q84](https://www.wikidata.org/wiki/Q84)|**London**]." *But:* "**In hindsight, the previous year typically appears
- less dramatic than the current one.**"
- *(Because "previous year" in this example does not refer to a concrete year.)*
+ [[Q84](https://www.wikidata.org/wiki/Q84)|**London**]." But "**In hindsight, the previous year typically appears
+ less dramatic than the current one.**",
+ because "previous year" in this example does not refer to a concrete year.
 - "[[Q317521](https://www.wikidata.org/wiki/Q317521)|**He**] **is now the richest person on**
- [desc:[Q2](https://www.wikidata.org/wiki/Q2)|**the planet**]." *(If "Earth" had occurred before in the text, then
- this would be a coreference instead.)*
+ [desc:[Q2](https://www.wikidata.org/wiki/Q2)|**the planet**].": If "Earth" had occurred before in the text, then
+ this would be a coreference instead.
 - "[Unknown1|**VRA**] **is one of the premier**
  [[Q729267](https://www.wikidata.org/wiki/Q729267)|**radiation oncology**] **groups in**
- [desc:[Q30](https://www.wikidata.org/wiki/Q30)|**the nation**] **.**" *(If "USA" had occurred before in the text,
- then this would be a coreference instead)*
+ [desc:[Q30](https://www.wikidata.org/wiki/Q30)|**the nation**] **.**": If "USA" had occurred before in the text,
+ then this would be a coreference instead.
 - "**In the** [desc:[Q1466815](https://www.wikidata.org/wiki/Q1466815)|**2008 election**]**, ...**"
 
 **Negative Examples:**
@@ -290,13 +318,13 @@ Annotate pronominal (e.g., her, he, itself) and nominal (e.g., the politician, t
 
 **Negative examples**
 - "[[Q317521](https://www.wikidata.org/wiki/Q317521)|**Elon Musk**] **is now the richest person on**
- [desc:[Q2](https://www.wikidata.org/wiki/Q2)|**the planet**]." *(If "Earth" had occurred before in the text, then
- this would be a coreference instead.)*
+ [desc:[Q2](https://www.wikidata.org/wiki/Q2)|**the planet**].": If "Earth" had occurred before in the text, then
+ this would be a coreference instead.
 
 
 ## What should be part of an entity mention?
 
-### Alternative Mention Spans
+### Alternative mention spans
 **Example:**
 In the phrase "[[Q6065437](https://www.wikidata.org/wiki/Q6065437)|
  [[Q192964](https://www.wikidata.org/wiki/Q192964)|**Istanbul University**]
@@ -318,11 +346,11 @@ If it is not clear whether something is part of the mention or not, e.g. because
  [[Q7268035](https://www.wikidata.org/wiki/Q7268035)|**Qohestan Rural District**]**,**
  [[Q1286121](https://www.wikidata.org/wiki/Q1286121)|**Darmian County**]**,**
  [[Q794](https://www.wikidata.org/wiki/Q794)|**Iran**]]":
- *Don't annotate a descriptive entity for each possible combination of adjacent region names. If a linker counts such
- occurrences as a single entity, it should do that consistently and link the entire phrase.*
+ Don't annotate a descriptive entity for each possible combination of adjacent region names. If a linker counts such
+ occurrences as a single entity, it should do that consistently and link the entire phrase.
 - "[[Q2309784](https://www.wikidata.org/wiki/Q2309784)|**professional**
  [[Q2309784](https://www.wikidata.org/wiki/Q2309784)|**racing cyclist**]]":
- *Note that this is not descriptive, as "professional" is at least to some degree redundant*
+ Note that this is not descriptive, as "professional" is at least to some degree redundant.
 
 ### Entity name + type
 **Example:**
@@ -479,18 +507,18 @@ The mention should not be annotated with the ethnicity in cases like "The
  be annotated with both the country and the ethnicity/citizens.
 
 **More examples:**
-- "[[Q30](https://www.wikidata.org/wiki/Q30)|[[Q846570](https://www.wikidata.org/wiki/Q846570)|**American**]] **dish**"
- *(country and citizens)*
-- "**'sectores' means 'sectors' in** [[Q1321](https://www.wikidata.org/wiki/Q1321)|**Spanish**]" *(language)*
+- "[[Q30](https://www.wikidata.org/wiki/Q30)|[[Q846570](https://www.wikidata.org/wiki/Q846570)|**American**]] **dish**":
+ country and citizens
+- "**'sectores' means 'sectors' in** [[Q1321](https://www.wikidata.org/wiki/Q1321)|**Spanish**]": language
 
 **Negative examples:**
-- "[[Q30](https://www.wikidata.org/wiki/Q30)|**American**] **movie**" *(country)*
+- "[[Q30](https://www.wikidata.org/wiki/Q30)|**American**] **movie**": country
 - "**The** [[Q15180](https://www.wikidata.org/wiki/Q15180)|**Soviets**] **agreed to the**
- [[Q30](https://www.wikidata.org/wiki/Q30)|**American**] **demands**" *(country)*
+ [[Q30](https://www.wikidata.org/wiki/Q30)|**American**] **demands**": country
 - "[[Q30](https://www.wikidata.org/wiki/Q30)|**American**] **music group**
- [[Q72349](https://www.wikidata.org/wiki/Q72349)|**Krewella**]" *(country)*
+ [[Q72349](https://www.wikidata.org/wiki/Q72349)|**Krewella**]": country
 - "[[Q23736538](https://www.wikidata.org/wiki/Q23736538)|**Store Egholm**] **is a small**
- [[Q35](https://www.wikidata.org/wiki/Q35)|**Danish**] **island**" *(country)*
+ [[Q35](https://www.wikidata.org/wiki/Q35)|**Danish**] **island**": country
 
 
 ### Metonyms
