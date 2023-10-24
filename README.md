@@ -1,6 +1,7 @@
 # Entity Linking Benchmark Annotation Guidelines
 
-The following annotation guidelines were derived to annotate the Wiki-Fair and News-Fair entity linking benchmarks.
+The following annotation guidelines were derived to annotate the Wiki-Fair and News-Fair entity linking benchmarks (the
+ benchmarks can be found in a separate repository at https://github.com/ad-freiburg/fair-entity-linking-benchmarks).
  The guidelines are aimed at making an entity linking benchmark as consistent and fair as possible.
 
 **Knowledge Base:** The guidelines assume that the annotation is done over Wikidata entities, but they can be
@@ -106,7 +107,7 @@ Many Wikidata occupations are not professions or occupations in the typical sens
 
 ### Datetimes and quantities
 **Example:**
- In the sentence "[[Q16855376](https://www.wikidata.org/wiki/Q16855376)|**Wayde**] **was born prematurel on**
+ In the sentence "[[Q16855376](https://www.wikidata.org/wiki/Q16855376)|**Wayde**] **was born prematurely on**
  [datetime|**July 15, 1992**] **and weighed only a little over** [quantity|**1**] **kg.**"
  , datetimes and quantities are annotated with special labels.
 
