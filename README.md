@@ -17,6 +17,8 @@ Entity annotations are written here as "[Q1234|**original mention text**]". Alte
  nested annotations, e.g., "[Q1234|**original** [Q1234|**mention text**]]". Prefixes to the QID are used to
  describe the annotation type. E.g. "[optional:Q1234|**some text**]" or [desc:Q123|**some entity description**]".
 
+See [here](existing_annotation_guidelines.md) for a list of related work on entity linking annotation guidelines.
+
 ## Table of Contents
 - [What kind of entities should be annotated?](#what-kind-of-entities-should-be-annotated?)
     - [Entities with whitelist types](#entities-with-whitelist-types)
