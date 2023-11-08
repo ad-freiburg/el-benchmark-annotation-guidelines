@@ -12,6 +12,18 @@ Ellis et al. consider only entities of the types person, organization, location,
  They do however also include non-named (nominal) mentions of entities of these types.
 
 
+## MAPA
+*Arranz et al., 2020*
+
+**Link:** http://www.elra.info/media/filer_public/2022/05/10/mapa_annotation-guidelines-v6.pdf
+
+Arranz et al. define entity recognition annotation guidelines for the purpose of anonymizing data. They define three
+ levels of entities. Level 1 consists of the entity types person, time, location, organization, amount and vehicle.
+ Level 2 entities are properties of level 1 entities such as profession, age, marital status or address. Level 3
+ entities are either components within an entity or types of an entity. These are for example title, family name,
+ street or postcode.  
+
+
 ## Impresso
 *Ehrmann et al., 2020* 
 
