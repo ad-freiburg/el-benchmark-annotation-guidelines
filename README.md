@@ -343,6 +343,7 @@ If it is not clear whether something is part of the mention or not, e.g. because
 - "[[Q213677](https://www.wikidata.org/wiki/Q213677)|[[Q213677](https://www.wikidata.org/wiki/Q213677)|**Louis VIII**]
  **,** [[Q841633](https://www.wikidata.org/wiki/Q841633)|**Landgrave**] **of**
  [[Q693551](https://www.wikidata.org/wiki/Q693551)|**Hesse-Darmstadt**]]"
+- "[[Q30](https://www.wikidata.org/wiki/Q30)|**the** [[Q30](https://www.wikidata.org/wiki/Q30)|**United States**]]"
 - "[[Q406](https://www.wikidata.org/wiki/Q406)|[[Q406](https://www.wikidata.org/wiki/Q406)|**Istanbul**]**,**
  [[Q43](https://www.wikidata.org/wiki/Q43)|**Turkey**]]"
 - "[[Q7268035](https://www.wikidata.org/wiki/Q7268035)|
